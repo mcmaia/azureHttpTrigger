@@ -31,20 +31,30 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             "Please pass a date on the query string or in the request body",
             status_code=400)
 
-    desc_resp = {
-        'events': sorted(final_data, key=lambda o: o['date'], reverse=True)
-    }
+    desc_resp = sorted(final_data, key=lambda o: o['date'], reverse=True)
 
     header = []
     csv_data = []
 
-    with open('england-and-wales_bank_holidays.csv', 'w',
+    for k in desc_resp:
+        for h in k:
+            if h not in header:
+                header.append(h)
+
+    for i in desc_resp:
+        for b in i.values():
+            csv_data.append(b)
+
+    n = 4
+    output = [csv_data[i:i + n] for i in range(0, len(csv_data), n)]
+    with open('england-and-wales_bank_holidays.csv',
+              'w',
+              newline='',
               encoding='UTF-8') as file:
         writer = csv.writer(file)
 
         writer.writerow(header)
-        writer.writerow(csv_data)
+        for row in output:
+            writer.writerow(row)
 
-    print(desc_resp)
-
-    return func.HttpResponse(json.dumps(desc_resp))
+    return func.HttpResponse(json.dumps(output))
