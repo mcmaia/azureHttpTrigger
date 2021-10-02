@@ -1,8 +1,6 @@
 import logging
-from typing import final
 import azure.functions as func
 import requests
-import json
 import csv
 from io import StringIO
 
