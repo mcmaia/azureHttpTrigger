@@ -173,10 +173,15 @@ After testing and running successfully, click ***Get function URL***
 # Output
 
 This link should look like this: https://httpfunction-challenge.azurewebsites.net/api/HttpTrigger1
-https://<project name>.azurewebsites.net/api/<function name>
+https://(project_name).azurewebsites.net/api/(function_name)
 
-To make it work, you must parse the parameters: **?date=<year>**
+To make it work, you must parse the parameters: **?date=year**
 
 and DONE!
 
 I hope you enjoyed your time!
+
+## Note
+
+The way it was presented here, the code is one block in a function. I would be nice to modulate it or to creat the functions for every task separatly.
+
