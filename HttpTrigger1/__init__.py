@@ -4,6 +4,7 @@ import azure.functions as func
 import requests
 import json
 import csv
+from io import StringIO
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -45,16 +46,19 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         for b in i.values():
             csv_data.append(b)
 
-    n = 4
-    output = [csv_data[i:i + n] for i in range(0, len(csv_data), n)]
-    with open('england-and-wales_bank_holidays.csv',
-              'w',
-              newline='',
-              encoding='UTF-8') as file:
-        writer = csv.writer(file)
+    n = len(header)
+    content = [csv_data[i:i + n] for i in range(0, len(csv_data), n)]
+    output = StringIO()
+    writer = csv.writer(output)
+    writer.writerow(header)
+    for row in content:
+        writer.writerow(row)
 
-        writer.writerow(header)
-        for row in output:
-            writer.writerow(row)
+    csv_output = output.getvalue().strip("\r\n")
 
-    return func.HttpResponse(json.dumps(output))
+    headers = {}
+    headers['content-type'] = 'text/csv'
+    headers[
+        'Content-Disposition'] = 'attachment;filename="england-and-wales_bank_holidays.csv"'
+
+    return func.HttpResponse(body=csv_output, status_code=200, headers=headers)
