@@ -1,7 +1,7 @@
 # Azure HTTP Function - from locally test to deploy
 
 This project will show you how to test and deploy your first Azure HTTP Function using Python. Awesome right?
-If you wnat to see the result, jump to the end of the document, there I explain how to see our output.
+If you want to see the result, jump to the end of the document. There I explain how to see our output.
 
 For this project, we just need to get the UK's list of bank holidays and export the response as a CSV file.
 
@@ -26,8 +26,8 @@ Let's get going.
 2. Download the VScode. <https://code.visualstudio.com/>
 
 3. In your VScode, follow the steps in the link <https://docs.microsoft.com/pt-br/azure/azure-functions/create-first-function-vs-code-python>. 
-**3a**.This link will show how to set up you envirement. It is pretty easy. Follow the instructions and go to the next step.
-**3b**. Note: Notice that this enviroment will give you this code:
+**3a**.This link will show how to set up your environment. It is pretty easy. Follow the instructions and go to the next step.
+**3b**. Note: Notice that this environment will give you this code:
 ```Python
 import logging
 import azure.functions as func
@@ -63,7 +63,10 @@ Here, I will explain the code blocks and what each one of them do.
 ### Imports
 
 The following list of imports is what is necessary to work on our code.
-It is important to hightlight 2 of those imports. **requests** and **from io import StringIO**. The first will allow you to consume an API. The second is a in-memory file-like object, which means, in our case, that this object will write our csv before downloading.
+It is important to highlight 2 of those imports. **requests** and **from io import StringIO**. The first will allow you to consume an API. The second is an in-memory file-like object, which means, in our case, that this object will write our csv before downloading.
+
+Note: `request` must be installed. `pip install requests` - after this, don't forget to insert `request` in your requeirements.txt.
+Otherwise, when you deploy your project, it won't work. That's because you have to "advise" Azure that it needs to include something you have installed locally.
 
 ```Python
 
@@ -76,7 +79,7 @@ from io import StringIO
 
 ```
 
-### creating function an calling the API
+### creating function and calling the API
 
 ```Python
 
@@ -132,7 +135,7 @@ desc_resp = sorted(final_data, key=lambda o: o['date'], reverse=True)
 
 ```
 
-### wrighting and downloading the CSV
+### writing and downloading the CSV
 
 ```python 
 
@@ -154,7 +157,7 @@ n = len(header)
     return func.HttpResponse(body=csv_output, status_code=200, headers=headers)
 ```
 
-## Cream on top (deploying, testing and generating link)
+## Cream on top (deploying, testing, and generating link)
 
 Now, deploy your function to Azure. 
 There you should access the function.
@@ -183,5 +186,6 @@ I hope you enjoyed your time!
 
 ## Note
 
-The way it was presented here, the code is one block in a function. I would be nice to modulate it or to creat the functions for every task separatly.
+The way it was presented here, the code is one block in a function. It would be nice to modulate it or to create the functions for every task separately.
+
 
