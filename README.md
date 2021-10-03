@@ -178,7 +178,7 @@ After testing and running successfully, click ***Get function URL***
 This link should look like this: https://httpfunction-challenge.azurewebsites.net/api/HttpTrigger1
 https://(project_name).azurewebsites.net/api/(function_name)
 
-To make it work, you must parse the parameters: **?date=year**
+To make it work, you must enter the parameters: **?date=year**
 
 and DONE!
 
