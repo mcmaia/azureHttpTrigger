@@ -26,7 +26,7 @@ Let's get going.
 2. Download the VScode. <https://code.visualstudio.com/>
 
 3. In your VScode, follow the steps in the link <https://docs.microsoft.com/pt-br/azure/azure-functions/create-first-function-vs-code-python>. 
-**3a**.This link will show how to set up your environment. It is pretty easy. Follow the instructions and go to the next step.
+**3a**.This link will show how to set up your environment. It is pretty easy. Follow the instructions and go to the next step. <br>
 **3b**. Note: Notice that this environment will give you this code:
 ```Python
 import logging
